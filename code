@@ -1,0 +1,114 @@
+
+ Smart Water Leakage Detection
+ Author : Sarika G
+
+ Components
+ - Arduino UNO
+ - 2 Water Flow Sensors
+ - 16x2 LCD (I2C)
+ - Relay Module
+ - Water Pump
+
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,16,2);
+
+const int flowSensor1 = 2;
+const int flowSensor2 = 3;
+const int relayPin = 8;
+
+volatile int pulseCount1 = 0;
+volatile int pulseCount2 = 0;
+
+float flowRate1 = 0;
+float flowRate2 = 0;
+
+unsigned long previousMillis = 0;
+
+void pulseCounter1()
+{
+  pulseCount1++;
+}
+
+void pulseCounter2()
+{
+  pulseCount2++;
+}
+
+void setup()
+{
+  pinMode(flowSensor1,INPUT_PULLUP);
+  pinMode(flowSensor2,INPUT_PULLUP);
+
+  pinMode(relayPin,OUTPUT);
+
+  digitalWrite(relayPin,HIGH);
+
+  attachInterrupt(digitalPinToInterrupt(flowSensor1),pulseCounter1,FALLING);
+  attachInterrupt(digitalPinToInterrupt(flowSensor2),pulseCounter2,FALLING);
+
+  lcd.init();
+  lcd.backlight();
+
+  lcd.setCursor(0,0);
+  lcd.print("Water Monitor");
+  delay(2000);
+  lcd.clear();
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  if(millis()-previousMillis>=1000)
+  {
+    detachInterrupt(digitalPinToInterrupt(flowSensor1));
+    detachInterrupt(digitalPinToInterrupt(flowSensor2));
+
+    flowRate1=(pulseCount1/7.5);
+    flowRate2=(pulseCount2/7.5);
+
+    lcd.clear();
+
+    lcd.setCursor(0,0);
+    lcd.print("IN:");
+    lcd.print(flowRate1);
+
+    lcd.setCursor(0,1);
+    lcd.print("OUT:");
+    lcd.print(flowRate2);
+
+    Serial.print("Input Flow:");
+    Serial.println(flowRate1);
+
+    Serial.print("Output Flow:");
+    Serial.println(flowRate2);
+
+    if(flowRate1-flowRate2>2)
+    {
+      digitalWrite(relayPin,LOW);
+
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("LEAK DETECTED");
+      lcd.setCursor(0,1);
+      lcd.print("Pump OFF");
+
+      Serial.println("Leakage Detected");
+    }
+    else
+    {
+      digitalWrite(relayPin,HIGH);
+    }
+
+    pulseCount1=0;
+    pulseCount2=0;
+
+    attachInterrupt(digitalPinToInterrupt(flowSensor1),pulseCounter1,FALLING);
+    attachInterrupt(digitalPinToInterrupt(flowSensor2),pulseCounter2,FALLING);
+
+    previousMillis=millis();
+  }
+}
