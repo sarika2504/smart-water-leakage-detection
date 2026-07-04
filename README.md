@@ -1,23 +1,23 @@
-# 💧 Smart Water Leakage Detection with Automated Alerts and Analytics
+#  Smart Water Leakage Detection with Automated Alerts and Analytics
 
 An Arduino-based embedded system designed to monitor water flow, detect leakage, and automatically control a water pump. The project aims to reduce water wastage by comparing inlet and outlet flow rates and displaying real-time system status on an LCD.
 
 
-## 📖 Project Overview
+##  Project Overview
 
 Water leakage is a significant cause of water loss in residential, agricultural, and industrial environments. This project uses **Arduino UNO**, **dual water flow sensors**, and a **relay module** to detect leakage and automatically stop the water pump when abnormal flow is detected.
 
 
-## ✨ Features
+## Features
 
-- 💧 Real-time water flow monitoring
-- 🚨 Automatic water leakage detection
-- ⚡ Relay-based pump control
-- 📟 16×2 LCD status display
-- 💰 Low-cost embedded solution
-- 🔧 Expandable to IoT applications
+-  Real-time water flow monitoring
+-  Automatic water leakage detection
+-  Relay-based pump control
+-  16×2 LCD status display
+-  Low-cost embedded solution
+-  Expandable to IoT applications
 
-## 🛠 Hardware Components
+##  Hardware Components
 
 - Arduino UNO
 - Water Flow Sensors ×2
@@ -30,7 +30,7 @@ Water leakage is a significant cause of water loss in residential, agricultural,
 
 ---
 
-## 💻 Software Used
+##  Software Used
 
 - Arduino IDE
 - Embedded C
@@ -44,7 +44,7 @@ Water leakage is a significant cause of water loss in residential, agricultural,
 4. The relay switches OFF the water pump.
 5. The LCD displays the system status.
 
-## 📂 Repository Structure
+##  Repository Structure
 
 smart-water-leakage-detection
 │
@@ -61,7 +61,7 @@ smart-water-leakage-detection
 ├── INSTALLATION.md
 └── TROUBLESHOOTING.md
 
-## 🚀 Applications
+##  Applications
 
 - Smart Homes
 - Agriculture
@@ -69,7 +69,7 @@ smart-water-leakage-detection
 - Smart Irrigation
 - Water Conservation Systems
 
-## 🔮 Future Enhancements
+##  Future Enhancements
 
 - ESP32 Wi-Fi Integration
 - Mobile App Notifications
@@ -77,7 +77,7 @@ smart-water-leakage-detection
 - Data Logging
 - AI-Based Leak Prediction
 
-## 👩‍💻 Author
+##  Author
 
 **Sarika G**
 
@@ -85,7 +85,7 @@ B.Tech – Electronics & Communication Engineering
 
 Presidency University, Bengaluru
 
-## 📄 License
+##  License
 
 This project is licensed under the MIT License.
 
